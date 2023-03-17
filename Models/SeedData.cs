@@ -50,6 +50,13 @@ namespace Villanueva_SportsStore.Models
                         Description = "Gold-plated chessboard with 24k gold plated chess pieces",
                         Category = "Chess",
                         Price = 199.75m
+                    },
+                    new Product
+                    {
+                        Name = "Silver chessboard set",
+                        Description = "Silver-plated chessboard with 24k gold plated chess pieces",
+                        Category = "Chess",
+                        Price = 129.75m
                     }
                 );
                 context.SaveChanges();
