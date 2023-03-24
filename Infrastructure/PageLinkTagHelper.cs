@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -22,6 +23,9 @@ namespace Villanueva_SportsStore.Infrastructure
         public ViewContext? ViewContext { get; set; }
         public PagingInfo? PageModel { get; set; }
         public string? PageAction { get; set; }
+        [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
+        public Dictionary<string, object> PageUrlvalues { get; set; }
+            = new Dictionary<string, object>();
         public bool PageClassesEnabled { get; set; } = false;
         public string PageClass { get; set; } = string.Empty;
         public string PageClassNormal { get; set; } = string.Empty;
@@ -35,8 +39,9 @@ namespace Villanueva_SportsStore.Infrastructure
                 for(int i = 1; i <= PageModel.TotalPages; i++)
                 {
                     TagBuilder tag = new TagBuilder("a");
+                    PageUrlvalues["productPage"] = i;
                     tag.Attributes["href"] = urlHelper.Action(PageAction,
-                    new { productPage = i });
+                        PageUrlvalues);
                     if(PageClassesEnabled)
                     {
                         tag.AddCssClass(PageClass);
